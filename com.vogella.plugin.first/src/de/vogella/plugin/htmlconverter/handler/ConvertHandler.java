@@ -92,26 +92,20 @@ public class ConvertHandler extends AbstractHandler
 		}
 	}
 
-	private void write(String dir, ICompilationUnit cu)
+	private void write(String dir, ICompilationUnit unit)
 	{
 		try
 		{
-			cu.getCorrespondingResource().getName();
-			String test = cu.getCorrespondingResource().getName();
-			// Need
+			final String content = unit.getSource();
+			final String corrected = content.replaceAll("\"(.*?)\"", "MANGO"); // TODO
+			
+			String test = unit.getCorrespondingResource().getName();
 			String[] name = test.split("\\.");
 			String htmlFile = dir + "\\" + name[0] + ".html";
+			
 			FileWriter output = new FileWriter(htmlFile);
 			BufferedWriter writer = new BufferedWriter(output);
-			writer.write("<html>");
-			writer.write("<head>");
-			writer.write("</head>");
-			writer.write("<body>");
-			writer.write("<pre>");
-			writer.write(cu.getSource());
-			writer.write("</pre>");
-			writer.write("</body>");
-			writer.write("</html>");
+			writer.write(corrected);
 			writer.flush();
 		}
 		catch (JavaModelException e)
