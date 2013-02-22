@@ -97,11 +97,11 @@ public class ConvertHandler extends AbstractHandler
 		try
 		{
 			final String content = unit.getSource();
-			final String corrected = content.replaceAll("\"(.*?)\"", "MANGO"); // TODO
+			final String corrected = content.replaceAll("\"(.*?)\"", "STRING_ID"); // TODO
 			
 			String test = unit.getCorrespondingResource().getName();
 			String[] name = test.split("\\.");
-			String htmlFile = dir + "\\" + name[0] + ".html";
+			String htmlFile = dir + "\\" + name[0] + "Extracted.java";
 			
 			FileWriter output = new FileWriter(htmlFile);
 			BufferedWriter writer = new BufferedWriter(output);

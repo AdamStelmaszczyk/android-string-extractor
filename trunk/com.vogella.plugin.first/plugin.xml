@@ -7,7 +7,7 @@
             locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
          <command
                commandId="de.vogella.plugin.htmlconverter.convert"
-               label="Create HTML"
+               label="Extract Strings"
                style="push">
             <visibleWhen
                   checkEnabled="false">
