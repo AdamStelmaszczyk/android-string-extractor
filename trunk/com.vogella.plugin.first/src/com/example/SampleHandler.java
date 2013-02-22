@@ -1,4 +1,4 @@
-package com.vogella.plugin.first.handlers;
+package com.example;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
