@@ -21,6 +21,22 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+/**
+ * @description A simple tool (Eclipse plugin) that extracts every hard-coded
+ *  string from Android .java files to strings.xml with just one click. 
+ *  To do it now, you have to search for every hard-coded word on your own.
+ *  Created during 5 hours, so code needs to be polished. 
+ *  
+ * @author Adam Stelmaszczyk, Michał Karpiuk
+ * @date 22/23.02.2013
+ * @see https://code.google.com/p/android-string-extractor-svn
+ * @see https://www.hackerleague.org/hackathons/name-collision/hacks/android-string-extractor
+ * 
+ * TODO: Further development ideas.
+ * 1. Extracting from all the source files with one click on the project, not from only one selected.
+ * 2. Updating existing .java files instead of writing to some external files.
+ * 3. Creating better string identifiers (STRING_IDs).
+ */
 public class ConvertHandler extends AbstractHandler
 {
 	private QualifiedName path = new QualifiedName("html", "path");
