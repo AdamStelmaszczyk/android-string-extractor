@@ -1,4 +1,4 @@
-package de.vogella.plugin.htmlconverter;
+package org.hackerleague.extractor;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
