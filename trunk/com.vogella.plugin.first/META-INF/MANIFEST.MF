@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: First
 Bundle-SymbolicName: Android_String_Extractor;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: VOGELLA
+Bundle-Vendor: HACKATON
 Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt.core;bundle-version="3.7.3",
  org.eclipse.core.resources;bundle-version="3.7.101",

@@ -6,8 +6,8 @@
       <menuContribution
             locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
          <command
-               commandId="de.vogella.plugin.htmlconverter.convert"
-               label="Extract Strings"
+               commandId="org.hackerleague.extractor"
+               label="Extract strings..."
                style="push">
             <visibleWhen
                   checkEnabled="false">
@@ -28,8 +28,8 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="de.vogella.plugin.htmlconverter.handler.ConvertHandler"
-            id="de.vogella.plugin.htmlconverter.convert"
+            defaultHandler="org.hackerleague.extractor.ConvertHandler"
+            id="org.hackerleague.extractor"
             name="Convert">
       </command>
    </extension>
