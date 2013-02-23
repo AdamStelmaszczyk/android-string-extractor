@@ -21,71 +21,85 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-public class ConvertHandler extends AbstractHandler {
+public class ConvertHandler extends AbstractHandler
+{
 	private QualifiedName path = new QualifiedName("html", "path");
 
 	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	public Object execute(ExecutionEvent event) throws ExecutionException
+	{
 		Shell shell = HandlerUtil.getActiveShell(event);
 		ISelection sel = HandlerUtil.getActiveMenuSelection(event);
 		IStructuredSelection selection = (IStructuredSelection) sel;
 
 		Object firstElement = selection.getFirstElement();
-		if (firstElement instanceof ICompilationUnit) {
+		if (firstElement instanceof ICompilationUnit)
+		{
 			createOutput(shell, firstElement);
 
-		} else {
-			MessageDialog.openInformation(shell, "Info",
-					"Please select a Java source file");
+		}
+		else
+		{
+			MessageDialog.openInformation(shell, "Info", "Please select a Java source file");
 		}
 		return null;
 	}
 
-	private void createOutput(Shell shell, Object firstElement) {
+	private void createOutput(Shell shell, Object firstElement)
+	{
 		String directory;
 		ICompilationUnit cu = (ICompilationUnit) firstElement;
 		IResource res = cu.getResource();
 		boolean newDirectory = true;
 		directory = getPersistentProperty(res, path);
 
-		if (directory != null && directory.length() > 0) {
-			newDirectory = !(MessageDialog.openQuestion(shell, "Question",
-					"Use the previous output directory?"));
+		if (directory != null && directory.length() > 0)
+		{
+			newDirectory = !(MessageDialog.openQuestion(shell, "Question", "Use the previous output directory?"));
 		}
-		if (newDirectory) {
+		if (newDirectory)
+		{
 			DirectoryDialog fileDialog = new DirectoryDialog(shell);
 			directory = fileDialog.open();
 
 		}
-		if (directory != null && directory.length() > 0) {
+		if (directory != null && directory.length() > 0)
+		{
 			setPersistentProperty(res, path, directory);
 			write(directory, cu, res.getName());
 		}
 	}
 
-	protected String getPersistentProperty(IResource res, QualifiedName qn) {
-		try {
+	protected String getPersistentProperty(IResource res, QualifiedName qn)
+	{
+		try
+		{
 			return res.getPersistentProperty(qn);
-		} catch (CoreException e) {
+		}
+		catch (CoreException e)
+		{
 			return "";
 		}
 	}
 
-	protected void setPersistentProperty(IResource res, QualifiedName qn,
-			String value) {
-		try {
+	protected void setPersistentProperty(IResource res, QualifiedName qn, String value)
+	{
+		try
+		{
 			res.setPersistentProperty(qn, value);
-		} catch (CoreException e) {
+		}
+		catch (CoreException e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	private void write(String dir, ICompilationUnit unit, String string) {
-		try {
-
+	private void write(String dir, ICompilationUnit unit, String string)
+	{
+		try
+		{
 			final String content = unit.getSource();
-			final String corrected = content.replaceAll("\"(.*?)\"",
-					"STRING_ID"); 
+			final String corrected = content.replaceAll("\"(.*?)\"", "STRING_ID");
 
 			String test = unit.getCorrespondingResource().getName();
 			String[] name = test.split("\\.");
@@ -98,11 +112,11 @@ public class ConvertHandler extends AbstractHandler {
 			BufferedWriter stringsWriter = new BufferedWriter(outputStrings);
 
 			int counter = 0;
-			while (matcher.find()) {
+			while (matcher.find())
+			{
 				counter++;
 				matcher.group();
-				stringsWriter.write("<string name=\"STRING_ID_" + counter
-						+ "\">" + matcher.group() + "</string>\n");
+				stringsWriter.write("<string name=\"STRING_ID_" + counter + "\">" + matcher.group() + "</string>\n");
 			}
 			stringsWriter.flush();
 
@@ -110,12 +124,14 @@ public class ConvertHandler extends AbstractHandler {
 			BufferedWriter writer = new BufferedWriter(output);
 			writer.write(corrected);
 			writer.flush();
-
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (JavaModelException e)
+		{
 			e.printStackTrace();
 		}
-
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
