@@ -114,15 +114,16 @@ public class ConvertHandler extends AbstractHandler
 	{
 		try
 		{
+			Pattern pattern = Pattern.compile("\"(.*?)\"");
+			
 			final String content = unit.getSource();
-			final String corrected = content.replaceAll("\"(.*?)\"", "STRING_ID");
+			final String corrected = pattern.matcher(content).replaceAll("STRING_ID");
 
 			String test = unit.getCorrespondingResource().getName();
 			String[] name = test.split("\\.");
 			String htmlFile = dir + "\\" + name[0] + "Extracted.java";
 			String stringsFile = dir + "\\strings.xml";
-
-			Pattern pattern = Pattern.compile("\"(.*?)\"");
+			
 			Matcher matcher = pattern.matcher(content);
 			FileWriter outputStrings = new FileWriter(stringsFile);
 			BufferedWriter stringsWriter = new BufferedWriter(outputStrings);
