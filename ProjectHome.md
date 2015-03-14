@@ -1,0 +1,1 @@
+A simple tool that extracts every hard-coded string from Android .java files to strings.xml
