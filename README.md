@@ -1,4 +1,4 @@
-# Android String extractor
+# Android String Extractor
 
 Adam Stelmaszczyk, Michał Karpiuk
 
